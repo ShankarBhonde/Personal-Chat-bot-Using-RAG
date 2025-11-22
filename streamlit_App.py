@@ -14,13 +14,12 @@ st.set_page_config(page_title="Document Genie", layout="wide")
 #st.image("https://cdn.vectorstock.com/i/1000v/59/19/handshake-symbol-sketch-style-vector-20975919.avif")
 st.markdown("""
 
-st.markdown(
-    f"""
-    <img src="https://cdn.vectorstock.com/i/1000v/59/19/handshake-symbol-sketch-style-vector-20975919.avif"
-         style="width:500px; height:200px; object-fit:cover; border-radius:10px;">
-    """,
-    unsafe_allow_html=True
-)
+<div style="display:flex; justify-content:center;">
+        <img src="https://cdn.vectorstock.com/i/1000v/59/19/handshake-symbol-sketch-style-vector-20975919.avif"
+             style="width:500px; height:200px; object-fit:cover;">
+    </div>
+
+
 
 
 ## Welcome My RAG Based Chatbot 💁
@@ -37,7 +36,8 @@ Follow these simple steps to interact with the chatbot:
 2. **Upload Your Documents**: The system accepts multiple PDF files at once, analyzing the content to provide comprehensive insights.
 
 3. **Ask a Question**: After processing the documents, ask any question related to the content of your uploaded documents for a precise answer.
-""")
+"""  
+           , unsafe_allow_html=True)
 
 
 
