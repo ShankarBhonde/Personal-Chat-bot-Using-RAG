@@ -128,6 +128,18 @@ def main():
 
     user_question = st.text_input("Ask a Question from the PDF Files", key="user_question")
 
+    # ⬇️ NEW — Submit button for mobile users
+    ask_btn = st.button("Submit Question")
+
+    if ask_btn:
+        if not api_key:
+            st.error("⚠ Please enter your API Key first.")
+        elif not user_question:
+            st.error("⚠ Please enter a question.")
+        else:
+            user_input(user_question, api_key)
+            
+
     if user_question and api_key:  # Ensure API key and user question are provided
         user_input(user_question, api_key)
 
