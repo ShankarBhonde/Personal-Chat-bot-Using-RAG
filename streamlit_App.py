@@ -16,22 +16,18 @@ st.set_page_config(page_title="Document Genie", layout="wide")
 st.markdown("""
 
 <style>
-#sticky-welcome {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 12px 30px;
-    border-radius: 10px;
-    z-index: 9999;
-    font-size: 25px;
-    font-weight: 700;
-    color: #edf1f2;
+.blink {
+  font-size: 35px;
+  font-weight: bold;
+  color: #00C4FF;
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 </style>
-<div id="sticky-welcome"></div>
 
+<center><div class="blink">Welcome My RAG Chatbot 🤖</div></center>
 
 
 
@@ -52,18 +48,7 @@ Follow these simple steps to interact with the chatbot:
 """  
            , unsafe_allow_html=True)
 
-welcome_text = "Welcome My RAG Chatbot 🤖"
-container = st.empty()
 
-# Typing animation
-display_text = ""
-for char in welcome_text:
-    display_text += char
-    container.markdown(
-        f"<div id='sticky-welcome'>{display_text}</div>",
-        unsafe_allow_html=True
-    )
-    time.sleep(0.06)
 
 #python code below
 
