@@ -9,27 +9,28 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 import os
+import time
 
 st.set_page_config(page_title="Document Genie", layout="wide")
 #st.image("https://cdn.vectorstock.com/i/1000v/59/19/handshake-symbol-sketch-style-vector-20975919.avif")
 st.markdown("""
 
 <style>
-.slide-text {
-  font-size: 32px;
-  font-weight: bold;
-  color: #00C4FF;
-  position: relative;
-  animation: slide 3s infinite;
-}
-@keyframes slide {
-  0% { left: -300px; }
-  50% { left: 0px; }
-  100% { left: -300px; }
+#sticky-welcome {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 30px;
+    border-radius: 10px;
+    z-index: 9999;
+    font-size: 25px;
+    font-weight: 700;
+    color: #00C4FF;
 }
 </style>
-
-<div class="slide-text">Welcome My RAG Chatbot 🤖</div>
+<div id="sticky-welcome"></div>
 
 
 
@@ -51,7 +52,20 @@ Follow these simple steps to interact with the chatbot:
 """  
            , unsafe_allow_html=True)
 
+welcome_text = "Welcome My RAG Chatbot 🤖"
+container = st.empty()
 
+# Typing animation
+display_text = ""
+for char in welcome_text:
+    display_text += char
+    container.markdown(
+        f"<div id='sticky-welcome'>{display_text}</div>",
+        unsafe_allow_html=True
+    )
+    time.sleep(0.06)
+
+#python code below
 
 # This is the first API key input; no need to repeat it in the main function.
 api_key = st.text_input("Enter your Google API Key:", type="password", key="api_key_input")
