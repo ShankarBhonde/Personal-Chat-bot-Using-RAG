@@ -16,13 +16,6 @@ st.set_page_config(page_title="Document Genie", layout="wide")
 st.markdown("""
 
 <style>
-body {
-    background-color: #f0d5b4;   /* Change the color */
-}
-</style>
-
-
-<style>
 #sticky-blink {
     position: fixed;
     top: 10%;                     /* middle vertically */
@@ -30,7 +23,10 @@ body {
     transform: translate(-50%, -50%);
     z-index: 9999;
     text-align: center;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.75);   /* ⬅ added background */
+    padding: 12px 30px;               /* spacing for good look */
+    border-radius: 12px;              /* curved edges */
+    backdrop-filter: blur(5px);       /* glass effect */
 }
 
 .blink {
