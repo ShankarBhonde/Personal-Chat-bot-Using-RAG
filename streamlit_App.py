@@ -66,12 +66,29 @@ def get_conversational_chain():
     return chain
 
 def user_input(user_question, api_key):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=api_key)
-    new_db = FAISS.load_local("faiss_index", embeddings)
+    # Check if index exists
+    if not os.path.exists("faiss_index"):
+        st.error("⚠ Please upload and process PDF first.")
+        return
+
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="models/embedding-001",
+        google_api_key=api_key
+    )
+
+    new_db = FAISS.load_local(
+        "faiss_index",
+        embeddings,
+        allow_dangerous_deserialization=True
+    )
+
     docs = new_db.similarity_search(user_question)
     chain = get_conversational_chain()
-    response = chain({"input_documents": docs, "question": user_question}, return_only_outputs=True)
-    st.write("Reply: ", response["output_text"])
+    response = chain({"input_documents": docs, "question": user_question},
+                     return_only_outputs=True)
+
+    st.write("Reply:", response["output_text"])
+
 
 def main():
     st.header("AI clone chatbot💁")
