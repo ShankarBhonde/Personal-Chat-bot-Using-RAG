@@ -18,7 +18,7 @@ st.markdown("""
 <style>
 #sticky-blink {
     position: fixed;
-    top: 5%;                     /* middle vertically */
+    top: 15%;                     /* middle vertically */
     left: 50%;                    /* middle horizontally */
     transform: translate(-50%, -50%);
     z-index: 9999;
