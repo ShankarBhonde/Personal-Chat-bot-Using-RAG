@@ -16,20 +16,18 @@ st.set_page_config(page_title="Document Genie", layout="wide")
 st.markdown("""
 
 <style>
-#sticky-blink {
-    position: fixed;
-    top: 11%;                     /* middle vertically */
-    left: 50%;                    /* middle horizontally */
-    transform: translate(-50%, -50%);
-    z-index: 9999;
+/* Container — normal position (not sticky) */
+#normal-blink {
     text-align: center;
-    background: rgba(0, 0, 0, 0.75);   /* ⬅ added background */
-    padding: 5px 30px;               /* spacing for good look */
-    border-radius: 12px;              /* curved edges */
-     border: 3px solid #f28705; 
-    backdrop-filter: blur(5px);       /* glass effect */
+    background: rgba(0, 0, 0, 0.75);
+    padding: 5px 30px;
+    border-radius: 12px;
+    border: 3px solid #f28705;
+    backdrop-filter: blur(5px);
+    margin-top: 20px;   /* space from top */
 }
 
+/* Animated text */
 .blink {
     font-size: 35px;
     font-weight: bold;
@@ -37,14 +35,16 @@ st.markdown("""
     animation: blinker 1s linear infinite;
 }
 
+/* Blink keyframes */
 @keyframes blinker {
     50% { opacity: 0; }
 }
 </style>
 
-<div id="sticky-blink">
+<div id="normal-blink">
     <div class="blink">Welcome To My Chatbot 💁</div>
 </div>
+
 
 
 
