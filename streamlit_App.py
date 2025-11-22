@@ -23,6 +23,7 @@ st.markdown("""
     transform: translate(-50%, -50%);
     z-index: 9999;
     text-align: center;
+    background: transparent;
 }
 
 .blink {
