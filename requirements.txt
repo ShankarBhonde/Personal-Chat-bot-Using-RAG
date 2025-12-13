@@ -1,6 +1,6 @@
 streamlit
 google-generativeai
-langchain
+langchain-core
 langchain-community
 langchain-google-genai
 langchain-text-splitters
