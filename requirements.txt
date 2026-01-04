@@ -1,9 +1,12 @@
 streamlit
 google-generativeai
-langchain-core
-langchain-community
-langchain-google-genai
-langchain-text-splitters
+
+langchain>=0.2.10
+langchain-core>=0.2.10
+langchain-community>=0.2.10
+langchain-text-splitters>=0.2.4
+langchain-google-genai>=1.0.6
+
 PyPDF2
 faiss-cpu
 python-dotenv
