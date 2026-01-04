@@ -70,16 +70,16 @@ def get_vector_store(text_chunks, api_key):
         model="models/text-embedding-004",
         google_api_key=api_key
     )
-    vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-    vector_store.save_local("faiss_index")
+    db = FAISS.from_texts(text_chunks, embedding=embeddings)
+    db.save_local("faiss_index")
 
 
-# ------------------ QA CHAIN (NEW VERSION) ------------------
+# ------------------ QA CHAIN ------------------
 def get_conversational_chain(api_key):
     prompt = PromptTemplate(
         template="""
-Answer the question as detailed as possible using ONLY the provided context.
-If the answer is not present, say:
+Answer the question using ONLY the provided context.
+If the answer is not available, say:
 "Answer is not available in the context."
 
 Context:
@@ -122,13 +122,13 @@ def user_input(user_question, api_key):
     docs = db.similarity_search(user_question, k=4)
     chain = get_conversational_chain(api_key)
 
-    response = chain.invoke({
+    result = chain.invoke({
         "context": docs,
         "question": user_question
     })
 
     st.subheader("Reply")
-    st.write(response)
+    st.write(result)
 
 
 # ------------------ MAIN APP ------------------
@@ -153,12 +153,17 @@ def main():
             accept_multiple_files=True
         )
 
-        if st.button("Submit & Process") and api_key:
-            with st.spinner("Processing PDFs..."):
-                raw_text = get_pdf_text(pdf_docs)
-                chunks = get_text_chunks(raw_text)
-                get_vector_store(chunks, api_key)
-                st.success("✅ PDFs processed successfully")
+        if st.button("Submit & Process"):
+            if not api_key:
+                st.error("⚠ Please enter API key first.")
+            elif not pdf_docs:
+                st.error("⚠ Please upload at least one PDF.")
+            else:
+                with st.spinner("Processing PDFs..."):
+                    raw_text = get_pdf_text(pdf_docs)
+                    chunks = get_text_chunks(raw_text)
+                    get_vector_store(chunks, api_key)
+                    st.success("✅ PDFs processed successfully")
 
 
 if __name__ == "__main__":
